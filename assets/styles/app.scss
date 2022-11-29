@@ -3,7 +3,8 @@
 :root {
     --mainColor: #ffffff;
     --secondColor: #aaaaaa;
-    --backgroundColor: #121212;
+    --backgroundColor: #262626;
+    --navbarBgColor: #0c0c0c;
 }
 
 body {
@@ -11,6 +12,14 @@ body {
     color: var(--mainColor);
 }
 
+main {
+    padding: 1em;
+}
+
 p {
     color: var(--secondColor);
+}
+
+.ws-bg-dark {
+    background-color: var(--navbarBgColor);
 }

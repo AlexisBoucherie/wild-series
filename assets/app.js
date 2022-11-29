@@ -11,6 +11,12 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+// app.js
+const $ = require('jquery');
+// this "modifies" the jquery module: adding behavior to it
+// the bootstrap module doesn't export/return anything
+require('bootstrap');
+
 // import logo
 import logoPath from './images/logo.png';
 
