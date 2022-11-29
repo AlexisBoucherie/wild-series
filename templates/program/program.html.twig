@@ -1,12 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Wild Series | Program n{{ page }}</title>
-</head>
-<body>
-<h1>Programme #{{ page }}</h1>
+{% extends 'base.html.twig' %}
+{% block title %}Wild Series | Program n{{ page }}{% endblock %}
 
-<p>Ceci est la page du programme numéro {{ page }}.</p>
-</body>
-</html>
+{% block body %}
+    <h1>Programme #{{ page }}</h1>
+    <p>Ceci est la page du programme numéro {{ page }}.</p>
+{% endblock %}

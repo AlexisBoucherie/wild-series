@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/bootstrap";
+
+:root {
+    --mainColor: #ffffff;
+    --secondColor: #aaaaaa;
+    --backgroundColor: #121212;
+}
+
+body {
+    background-color: var(--backgroundColor);
+    color: var(--mainColor);
+}
+
+p {
+    color: var(--secondColor);
+}

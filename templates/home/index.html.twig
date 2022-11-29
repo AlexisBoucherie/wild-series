@@ -1,11 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Wild Series | Home</title>
-</head>
-<body>
-<h1>Bienvenue !</h1>
-    <p>Voilà ma première page Symfony !</p>
-</body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Wild Series | Homepage{% endblock %}
+
+{% block body %}
+    <h1>WildSeries - Homepage</h1>
+{#    <img src="{{ asset('build/images/logo.png') }}" alt="Logo"/>#}
+{% endblock %}
