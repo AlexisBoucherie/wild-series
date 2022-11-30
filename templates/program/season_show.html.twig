@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Résultats pour le programme : {{ program.title }}, saison {{ season.number }}</h1>
+    {% for episode in episodes %}
+        <div class="media">
+            <div class="media-body">
+                <h2 class="mt-0">Episode n°{{ episode.number }} - {{ episode.title }}</h2>
+                <p>{{ episode.synopsis }}</p>
+            </div>
+        </div>
+    {% else %}
+        <p>Désolé! Aucun épisode trouvé pour cette saison.</p>
+    {% endfor %}
+    <a href="/program/{{ program.id }}">
+        Retour à la liste des saisons de {{ program.title }}
+    </a>
+    <br>
+    <a href="{{ path('program_index') }}">
+        Retour à la liste des programmes
+    </a>
+{% endblock %}
