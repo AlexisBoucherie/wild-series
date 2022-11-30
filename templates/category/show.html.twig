@@ -3,15 +3,15 @@
 {% block body %}
     <h1>Résultats pour la catégorie : {{ category.name }}</h1>
     {% for program in programs %}
-    <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-        <div class="media-body">
-            <h2 class="mt-0">{{ program.title }}</h2>
-            <p>{{ program.synopsis }}</p>
+        <div class="media">
+            <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+            <div class="media-body">
+                <h2 class="mt-0">{{ program.title }}</h2>
+                <p>{{ program.synopsis }}</p>
+            </div>
         </div>
-    </div>
-        {% else %}
-            <p>Désolé! Aucun film trouvé pour cette catégorie.</p>
+    {% else %}
+        <p>Désolé! Aucun film trouvé pour cette catégorie.</p>
     {% endfor %}
     <a href="{{ path('program_index') }}">
         Retour à la liste des programmes

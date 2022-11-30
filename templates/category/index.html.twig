@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Toutes les résultats pour la catégorie choisie : </h1>
     {% for category in categories %}
-            <h2>{{ category.name }}</h2>
+        <h2>{{ category.name }}</h2>
     {% else %}
         Aucune catégorie trouvée.
     {% endfor %}
