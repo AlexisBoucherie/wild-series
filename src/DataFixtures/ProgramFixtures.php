@@ -25,10 +25,10 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     ];
     const CAT = [
         'category_Aventure',
+        'category_Action',
         'category_Fantastique',
-        'category_Action',
-        'category_Aventure',
-        'category_Action',
+        'category_Animation',
+        'category_Horreur',
     ];
 
     public function load(ObjectManager $manager)
@@ -38,6 +38,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle(self::TITLE[$i]);
             $program->setSynopsis(self::SYNOPSIS[$i]);
             $program->setCategory($this->getReference(self::CAT[$i]));
+            $this->addReference('program_' . $i, $program);
             $manager->persist($program);
         }
         $manager->flush();
