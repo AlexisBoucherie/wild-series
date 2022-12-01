@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light ws-bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand text-light" href="{{ path('program_index') }}">Wild Series</a>
+        <a class="navbar-brand text-light" href="{{ path('app_index') }}">Wild Series</a>
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-muted" aria-current="page" href="{{ path('program_index') }}">Homepage</a>
+                    <a class="nav-link text-muted" aria-current="page" href="{{ path('app_index') }}">Homepage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-muted" href="/program">Program</a>
+                    <a class="nav-link text-muted" href="{{ path('program_index') }}">Program</a>
                 </li>
             </ul>
             <form class="d-flex">
