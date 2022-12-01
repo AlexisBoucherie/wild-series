@@ -3,19 +3,31 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
-    <h1>Toutes les séries sur Wild Series : </h1>
-    {% for program in programs %}
-        <div>
-            <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
-            <p>{{ program.synopsis }}</p>
-            {# Lien vers la fiche de la série : #}
-            <a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+    <div class="container">
+        <h1>Toutes les séries sur Wild Series : </h1>
+        <div class="row">
+            {% for program in programs %}
+                <div class="d-flex align-items-stretch col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="card ws-bg-dark m-2">
+                        <img class="card-img-top" src="{{ program.poster }}" alt="Affiche de {{ program.title }}">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-3">{{ program.title }}</h2>
+                            <h4 class="card-subtitle mb-2 text-muted">Catégorie : {{ program.category.name }}</h4>
+                            <p class="card-text">{{ program.synopsis }}</p>
+                            <div class="text-center">
+                                <a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-outline-danger">Voir
+                                    la fiche</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucune série trouvée.</p>
+            {% endfor %}
         </div>
-    {% else %}
-        <p>Aucune série trouvée.</p>
-    {% endfor %}
 
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
+        <a href="{{ path('app_index') }}">
+            Retour à l'accueil
+        </a>
+    </div>
 {% endblock %}
