@@ -1,0 +1,10 @@
+{# templates/program/new.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(program_form) }}
+    {{ form_widget(program_form) }}
+    <button type="submit">Add program</button>
+    {{ form_end(program_form) }}
+{% endblock %}

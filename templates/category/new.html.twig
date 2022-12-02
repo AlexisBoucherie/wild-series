@@ -1,0 +1,10 @@
+{# templates/category/new.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(category_form) }}
+    {{ form_widget(category_form) }}
+    <button type="submit">Add category</button>
+    {{ form_end(category_form) }}
+{% endblock %}
