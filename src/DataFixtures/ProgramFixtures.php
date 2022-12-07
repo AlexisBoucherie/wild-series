@@ -7,6 +7,8 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
+use Faker\Factory;
+
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
     const TITLE = [
@@ -33,11 +35,16 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
+
         for ($i = 0; $i < 5; $i++) {
             $program = new Program();
             $program->setTitle(self::TITLE[$i]);
             $program->setSynopsis(self::SYNOPSIS[$i]);
             $program->setCategory($this->getReference(self::CAT[$i]));
+            for ($j = 0;$j < 4; $j++) {
+                $program->addActor($this->getReference('actor_' . $faker->numberBetween(0, 49)));
+            }
             $this->addReference('program_' . $i, $program);
             $manager->persist($program);
         }
