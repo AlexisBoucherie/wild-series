@@ -39,6 +39,8 @@ class ProgramController extends AbstractController
         // Was the form submitted ?
         if ($form->isSubmitted() && $form->isValid()) {
             $programRepository->save($program, true);
+            // Once the form is submitted, valid and the data inserted in database, you can define the success flash message
+            $this->addFlash('success', 'The new program has been created');
             // Redirect to programs list
             return $this->redirectToRoute('program_index');
         }

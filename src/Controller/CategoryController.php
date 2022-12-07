@@ -36,6 +36,7 @@ class CategoryController extends AbstractController
         // Was the form submitted ?
         if ($form->isSubmitted()) {
             $categoryRepository->save($category, true);
+            $this->addFlash('success', 'The new category has been created');
             // Redirect to categories list
             return $this->redirectToRoute('app_category_index');
         }
