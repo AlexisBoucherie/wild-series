@@ -3,37 +3,39 @@
 {% block title %}Série #{{ program.id }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="media">
-            <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
-            <div class="media-body">
-                <h1 class="mt-0">{{ program.title }}</h1>
-                <p>{{ program.synopsis }}</p>
-                <p>Catégorie : {{ program.category.name }}</p>
-                <h2>Saisons : </h2>
-                <ul>
-                    {% for season in program.seasons %}
-                        <li>
-                            <a href="{{ path('program_season_show', { 'program_id':program.id, 'season_id':season.id }) }}">Saison {{ season.number }}
-                                ({{ season.year }})</a>
-                            <p>{{ season.description }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <h2>Acteurs :</h2>
-                <ul>
-                    {% for actor in program.actors %}
-                        <li>{{ actor.name }}</li>
-                    {% else %}
-                        <li>Aucun acteur pour cette série</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div>
-            <a href="{{ path('program_index') }}">
-                Retour à la liste des programmes
-            </a>
-        </div>
-    </div>
+    {{ dump(programDuration) }}
+
+{#    <div class="container">#}
+{#        <div class="media">#}
+{#            <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">#}
+{#            <div class="media-body">#}
+{#                <h1 class="mt-0">{{ program.title }}</h1>#}
+{#                <p>{{ program.synopsis }}</p>#}
+{#                <p>Catégorie : {{ program.category.name }}</p>#}
+{#                <h2>Saisons : </h2>#}
+{#                <ul>#}
+{#                    {% for season in program.seasons %}#}
+{#                        <li>#}
+{#                            <a href="{{ path('program_season_show', { 'program_id':program.id, 'season_id':season.id }) }}">Saison {{ season.number }}#}
+{#                                ({{ season.year }})</a>#}
+{#                            <p>{{ season.description }}</p>#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#                <h2>Acteurs :</h2>#}
+{#                <ul>#}
+{#                    {% for actor in program.actors %}#}
+{#                        <li>{{ actor.name }}</li>#}
+{#                    {% else %}#}
+{#                        <li>Aucun acteur pour cette série</li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div>#}
+{#            <a href="{{ path('program_index') }}">#}
+{#                Retour à la liste des programmes#}
+{#            </a>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}

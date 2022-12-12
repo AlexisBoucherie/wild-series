@@ -3,11 +3,13 @@
 namespace App\DataFixtures;
 
 use App\Entity\Program;
+use ContainerRDu5FCj\getSluggerService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -45,6 +47,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             for ($j = 0;$j < 4; $j++) {
                 $program->addActor($this->getReference('actor_' . $faker->numberBetween(0, 49)));
             }
+            $program->setSlug($program->getTitle());
             $this->addReference('program_' . $i, $program);
             $manager->persist($program);
         }
