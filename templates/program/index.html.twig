@@ -15,7 +15,7 @@
                             <h4 class="card-subtitle mb-2 text-muted">Catégorie : {{ program.category.name }}</h4>
                             <p class="card-text">{{ program.synopsis }}</p>
                             <div class="text-center">
-                                <a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-outline-danger">Voir
+                                <a href="{{ path("program_show", { 'slug':program.slug }) }}" class="btn btn-outline-danger">Voir
                                     la fiche</a>
                             </div>
                         </div>

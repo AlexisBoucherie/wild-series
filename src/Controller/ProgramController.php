@@ -7,7 +7,6 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
-use App\services\ProgramDuration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +57,7 @@ class ProgramController extends AbstractController
             $mailer->send($email);
 
             // Redirect to programs list
-            return $this->redirectToRoute('program_index');
+            return $this->redirectToRoute('program_index', ['program' => $program]);
         }
 
         // Render the form
@@ -67,18 +66,16 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<^[0-9]+$>}', name: 'show')]
-    public function show(Program $program, ProgramDuration $programDuration): Response
+    #[Route('/{slug}', name: 'show')]
+    public function show(Program $program): Response
     {
-
         return $this->render('program/show.html.twig', [
             'program' => $program,
-            'programDuration' => $programDuration->calculate($program),
         ]);
     }
 
-    #[Route('/{program_id}/season/{season_id}', name: 'season_show')]
-    #[Entity('program', options: ['mapping' => ['program_id' => 'id']])]
+    #[Route('/{slug}/season/{season_id}', name: 'season_show')]
+    #[Entity('program', options: ['mapping' => ['slug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['season_id' => 'id']])]
     public function showSeason(Program $program, Season $season): Response
     {
@@ -91,8 +88,8 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{program_id}/season/{season_id}/episode/{episode_id}', name: 'episode_show')]
-    #[Entity('program', options: ['mapping' => ['program_id' => 'id']])]
+    #[Route('/{slug}/season/{season_id}/episode/{episode_id}', name: 'episode_show')]
+    #[Entity('program', options: ['mapping' => ['slug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['season_id' => 'id']])]
     #[Entity('episode', options: ['mapping' => ['episode_id' => 'id']])]
     public function showEpisode(Program $program, Season $season, Episode $episode): Response
