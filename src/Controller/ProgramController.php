@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
-use App\Form\CategoryType;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\services\ProgramDuration;
@@ -13,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -30,7 +31,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, ProgramRepository $programRepository, SluggerInterface $slugger): Response
+    public function new(Request $request, MailerInterface $mailer, ProgramRepository $programRepository, SluggerInterface $slugger): Response
     {
         // Create a new Category Object
         $program = new Program();
@@ -47,6 +48,15 @@ class ProgramController extends AbstractController
             $programRepository->save($program, true);
             // Once the form is submitted, valid and the data inserted in database, you can define the success flash message
             $this->addFlash('success', 'The new program has been created');
+
+            // send email when a new program is added
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to('alexis.boucherie@gmail.com')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('program/newProgramEmail.html.twig', ['program' => $program]));
+            $mailer->send($email);
+
             // Redirect to programs list
             return $this->redirectToRoute('program_index');
         }
