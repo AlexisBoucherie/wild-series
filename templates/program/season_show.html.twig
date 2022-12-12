@@ -6,7 +6,7 @@
         {% for episode in episodes %}
             <div class="media">
                 <div class="media-body">
-                    <a href="{{ path('program_episode_show', {'program_id':program.id, 'season_id':season.id, 'episode_id':episode.id}) }}">
+                    <a href="{{ path('program_episode_show', {'slug':program.slug, 'season_id':season.id, 'episode_id':episode.id}) }}">
                         <p class="mt-0">Episode n°{{ episode.number }} - {{ episode.title }}</p></a>
                 </div>
             </div>
@@ -14,7 +14,7 @@
             <p>Désolé! Aucun épisode trouvé pour cette saison.</p>
         {% endfor %}
         <div>
-            <a href="/program/{{ program.id }}">
+            <a href="/program/{{ program.slug }}">
                 Retour à la liste des saisons de {{ program.title }}
             </a>
         </div>

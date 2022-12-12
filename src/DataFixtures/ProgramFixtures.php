@@ -35,6 +35,13 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         'category_Horreur',
     ];
 
+    private SluggerInterface $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
@@ -47,7 +54,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             for ($j = 0;$j < 4; $j++) {
                 $program->addActor($this->getReference('actor_' . $faker->numberBetween(0, 49)));
             }
-            $program->setSlug($program->getTitle());
+            $program->setSlug($this->slugger->slug($program->getTitle()));
             $this->addReference('program_' . $i, $program);
             $manager->persist($program);
         }
