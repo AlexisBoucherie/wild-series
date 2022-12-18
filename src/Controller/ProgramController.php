@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Form\CommentType;
 use App\Form\ProgramType;
+use App\Repository\CommentRepository;
 use App\Repository\ProgramRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -92,12 +95,35 @@ class ProgramController extends AbstractController
     #[Entity('program', options: ['mapping' => ['slug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['season_id' => 'id']])]
     #[Entity('episode', options: ['mapping' => ['episode_id' => 'id']])]
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    public function showEpisode( Program $program, Season $season, Episode $episode): Response
     {
+        $allComments = $episode->getComments();
+
         return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+            'comments' => $allComments,
+        ]);
+    }
+
+    #[Route('/comment/new', name: 'new_comment', methods: ['GET', 'POST'])]
+    public function newComment(Request $request, CommentRepository $commentRepository): Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentRepository->save($comment, true);
+            $this->addFlash('success', 'Your new comment has been added');
+
+            return $this->redirectToRoute('program_show', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('program/new_comment.html.twig', [
+            'comment' => $comment,
+            'form' => $form,
         ]);
     }
 }

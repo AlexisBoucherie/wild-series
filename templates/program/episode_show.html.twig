@@ -9,6 +9,21 @@
                 <p>{{ episode.synopsis }}</p>
             </div>
         </div>
+
+        {% if app.user %}
+            <a href="{{ path('program_new_comment') }}"><h3>Ajouter un nouveau commentaire</h3></a>
+        {% else %}
+            <h3>Connectez-vous pour ajouter votre commentaire !</h3>
+        {% endif %}
+
+        <div class="comments container">
+            {% for comment in comments %}
+                <div class="border border-info rounded p-2 mb-3">
+                    <p>{{ comment.comment }}</p>
+                    <p>{{ comment.rate }}/10</p>
+                </div>
+            {% endfor %}
+        </div>
         <div>
             <a href="{{ path('program_season_show', {'slug':program.slug, 'season_id':season.id}) }}">
                 Retour à la liste des épisodes de {{ program.title }}
