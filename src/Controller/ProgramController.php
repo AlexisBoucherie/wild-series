@@ -118,7 +118,7 @@ class ProgramController extends AbstractController
             $commentRepository->save($comment, true);
             $this->addFlash('success', 'Your new comment has been added');
 
-            return $this->redirectToRoute('program_show', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('program/new_comment.html.twig', [
