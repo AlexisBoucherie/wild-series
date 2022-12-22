@@ -51,6 +51,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle(self::TITLE[$i]);
             $program->setSynopsis(self::SYNOPSIS[$i]);
             $program->setCategory($this->getReference(self::CAT[$i]));
+            $program->setOwner($this->getReference('user_'.$faker->numberBetween(1, 2)));
             for ($j = 0;$j < 4; $j++) {
                 $program->addActor($this->getReference('actor_' . $faker->numberBetween(0, 49)));
             }
