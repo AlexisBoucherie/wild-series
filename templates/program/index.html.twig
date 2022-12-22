@@ -5,6 +5,13 @@
 {% block body %}
     <div class="container">
         <h1>Toutes les séries sur Wild Series : </h1>
+        {# --- SEARCH FORM --- #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button>Search</button>
+        {{ form_end(form) }}
+
+        {# --- PROGRAM LIST --- #}
         <div class="row">
             {% for program in programs %}
                 <div class="d-flex align-items-stretch col-sm-12 col-md-6 col-lg-4 col-xl-3">
